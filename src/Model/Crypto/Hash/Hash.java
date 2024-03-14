@@ -9,16 +9,18 @@ import java.util.HashMap;
 
 public class Hash {
     private static final HashMap<String, DigestAlg> typeDigestMap;
+    private static final DigestDirector director;
 
     static {
         typeDigestMap = new HashMap<>();
         typeDigestMap.put("hash094", DigestAlg.HASH_94);
         typeDigestMap.put("hash256", DigestAlg.HASH_2012_256);
         typeDigestMap.put("hash512", DigestAlg.HASH_2012_512);
+
+        director = new DigestDirector();
     }
 
     public static String execute(String message, String alg){
-        DigestDirector director = new DigestDirector();
         GOSTDigestFactory factory = null;
         try {
             factory = director.getFactory(typeDigestMap.get(alg));

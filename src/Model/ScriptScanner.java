@@ -495,7 +495,7 @@ public class ScriptScanner {
         String[] hmacArgs = extractBtwBrackets(line).split(",+");
         String text = hmacArgs[0];
         String key = hmacArgs[1];
-        return HMAC_3411.executeHmac(text, key, hmacAlg);
+        return HMAC_3411.execute(text, key, hmacAlg);
     }
 
     private String calcMulPoint(String text) {
