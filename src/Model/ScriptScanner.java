@@ -3,7 +3,7 @@ package Model;
 import Model.Crypto.ECPointOperation;
 import Model.Crypto.EncryptionGOST_TC26;
 import Model.Crypto.HMAC_3411;
-import Model.Crypto.Hash;
+import Model.Crypto.Hash.Hash;
 import org.bouncycastle.crypto.CryptoException;
 
 import javax.smartcardio.CardException;
@@ -486,7 +486,7 @@ public class ScriptScanner {
         hashMatcher.reset();
         String hashAlg = line.substring(0,7);
         String m = extractBtwBrackets(line);
-        return Hash.executeHash(m, hashAlg);
+        return Hash.execute(m, hashAlg);
     }
 
     private String calculateHmac(String line){
