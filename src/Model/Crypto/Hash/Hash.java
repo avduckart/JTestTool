@@ -8,8 +8,9 @@ import org.bouncycastle.util.Arrays;
 import java.util.HashMap;
 
 public class Hash {
-    private static final HashMap<String, DigestAlg> typeDigestMap;
+    public static final HashMap<String, DigestAlg> typeDigestMap;
     private static final DigestDirector director;
+    private ExtendedDigest digest;
 
     static {
         typeDigestMap = new HashMap<>();
@@ -20,22 +21,22 @@ public class Hash {
         director = new DigestDirector();
     }
 
-    public static String execute(String message, String alg){
-        GOSTDigestFactory factory = null;
-        try {
-            factory = director.getFactory(typeDigestMap.get(alg));
-        } catch (CryptoException e) {
-            throw new RuntimeException(e);
-        }
-        ExtendedDigest digest = factory.create();
+    public Hash(DigestAlg alg){
+        digest = director.getFactory(alg).create();
+    }
 
+    public Hash(String alg){
+        this(typeDigestMap.get(alg));
+    }
+
+    public String execute(String message, String alg){
         byte[] digest_ = new byte[digest.getByteLength()];
         byte[] m = XToY.stringToBytes(message);
         hashCalculate(digest, m, digest_);
         return XToY.bytesToString(Arrays.reverse(digest_));
     }
 
-    private static void hashCalculate(ExtendedDigest hash, byte[] message, byte[] digest) {
+    private void hashCalculate(ExtendedDigest hash, byte[] message, byte[] digest) {
         if (hash == null)
             return;
 

@@ -74,7 +74,7 @@ public class Loader {
                         System.out.println(scriptPath.toUpperCase());
                         File log = new File(String.format("%s %s",
                                 new SimpleDateFormat("MM-dd-yyyy hh-mm-ss").format(new Date()),
-                                scriptPath.substring(scriptPath.lastIndexOf('\\') + 1)));
+                                "QWER" /* scriptPath.substring(scriptPath.lastIndexOf('\\') + 1))*/));
                         logger = new Logger(log);
                         if(regime.equals("-f"))
                             scriptPath = value + "\\" + scriptPath;
