@@ -1,4 +1,4 @@
-package Model.Crypto.Digest;
+package Model.JTestCrypto.JTestDigest;
 
 import org.bouncycastle.crypto.ExtendedDigest;
 import org.bouncycastle.crypto.digests.GOST3411Digest;

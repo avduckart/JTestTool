@@ -1,4 +1,4 @@
-package Model.Crypto.Digest;
+package Model.JTestCrypto.JTestDigest;
 
 import Model.XToY;
 import org.bouncycastle.crypto.ExtendedDigest;
@@ -6,7 +6,7 @@ import org.bouncycastle.util.Arrays;
 
 import java.util.HashMap;
 
-public class Digest {
+public class JTestDigest {
     public static final HashMap<String, DigestAlg> typeDigestMap;
     private final ExtendedDigest digest;
 
@@ -17,11 +17,11 @@ public class Digest {
         typeDigestMap.put("hash512", DigestAlg.HASH_2012_512);
     }
 
-    public Digest(DigestAlg alg){
+    public JTestDigest(DigestAlg alg){
         digest = DigestDirector.getFactory(alg).create();
     }
 
-    public Digest(String alg){
+    public JTestDigest(String alg){
         this(typeDigestMap.get(alg));
     }
 

@@ -1,4 +1,4 @@
-package Model.Crypto;
+package Model.JTestCrypto;
 
 import Model.XToY;
 import org.bouncycastle.crypto.digests.GOST3411_2012_512Digest;

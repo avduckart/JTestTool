@@ -1,4 +1,4 @@
-package Model.Crypto.Digest;
+package Model.JTestCrypto.JTestDigest;
 
 public class DigestDirector {
     public static GOSTDigestFactory getFactory(DigestAlg alg) {

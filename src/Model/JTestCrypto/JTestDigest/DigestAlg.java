@@ -1,4 +1,4 @@
-package Model.Crypto.Digest;
+package Model.JTestCrypto.JTestDigest;
 
 public enum DigestAlg {
     HASH_94,

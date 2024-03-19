@@ -1,8 +1,8 @@
-package Model.Crypto;
+package Model.JTestCrypto;
 
-import Model.Crypto.Digest.DigestAlg;
-import Model.Crypto.Digest.DigestDirector;
-import Model.Crypto.Digest.Digest;
+import Model.JTestCrypto.JTestDigest.DigestAlg;
+import Model.JTestCrypto.JTestDigest.DigestDirector;
+import Model.JTestCrypto.JTestDigest.JTestDigest;
 import Model.XToY;
 import org.bouncycastle.crypto.macs.HMac;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -20,7 +20,7 @@ public class HMAC {
     }
 
     public HMAC(String digest) {
-        this(Digest.typeDigestMap.get(digest));
+        this(JTestDigest.typeDigestMap.get(digest));
     }
 
     public String hmac(String message, String key){

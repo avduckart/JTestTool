@@ -1,4 +1,4 @@
-package Model.Crypto;
+package Model.JTestCrypto;
 
 import java.math.BigInteger;
 import java.util.Arrays;
