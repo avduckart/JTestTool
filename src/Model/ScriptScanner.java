@@ -488,7 +488,7 @@ public class ScriptScanner {
         String hashAlg = line.substring(0,7);
         String m = extractBtwBrackets(line);
         Hash hash = new Hash(hashAlg);
-        return hash.execute(m, hashAlg);
+        return hash.execute(m);
     }
 
     private String calculateHmac(String line){
