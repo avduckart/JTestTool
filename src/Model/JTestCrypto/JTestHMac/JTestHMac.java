@@ -1,32 +1,41 @@
-package Model.JTestCrypto;
+package Model.JTestCrypto.JTestHMac;
 
 import Model.JTestCrypto.JTestDigest.DigestAlg;
 import Model.JTestCrypto.JTestDigest.DigestDirector;
 import Model.JTestCrypto.JTestDigest.JTestDigest;
 import Model.XToY;
+import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.macs.HMac;
 import org.bouncycastle.crypto.params.KeyParameter;
 
 
-public class HMAC {
+public class JTestHMac {
     private HMac hmac;
 
-    public HMAC(org.bouncycastle.crypto.Digest digest) {
+    public HMac get(){
+        return hmac;
+    }
+
+    public void set(HMac hmac){
+        this.hmac = hmac;
+    }
+
+    public JTestHMac(Digest digest) {
         hmac = new HMac(digest);
     }
 
-    public HMAC(DigestAlg alg) {
+    public JTestHMac(DigestAlg alg) {
         this(DigestDirector.getFactory(alg).create());
     }
 
-    public HMAC(String digest) {
+    public JTestHMac(String digest) {
         this(JTestDigest.typeDigestMap.get(digest));
     }
 
-    public String hmac(String message, String key){
-        byte[] m = XToY.stringToBytes(message);
+    public String execute(String message, String key){
+        byte[] msg = XToY.stringToBytes(message);
         byte[] keyArr = XToY.stringToBytes(key);
-        return XToY.bytesToString(hmac(m, keyArr));
+        return XToY.bytesToString(hmac(msg, keyArr));
     }
 
     public byte[] hmac(byte[] text, byte[] key){

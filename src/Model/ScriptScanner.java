@@ -2,9 +2,9 @@ package Model;
 
 import Model.JTestCrypto.ECPointOperation;
 import Model.JTestCrypto.EncryptionGOST_TC26;
-import Model.JTestCrypto.HMAC;
+import Model.JTestCrypto.JTestHMac.JTestHMac;
 import Model.JTestCrypto.JTestDigest.JTestDigest;
-import Model.JTestCrypto.PBKDF2;
+import Model.JTestCrypto.JTestPbkdf2.JTestPBKDF2;
 import org.bouncycastle.crypto.CryptoException;
 
 import javax.smartcardio.CardException;
@@ -264,7 +264,7 @@ public class ScriptScanner {
         String salt = pbkdfArgs[1];
         String count = pbkdfArgs[2];
         String dkLen = pbkdfArgs[3];
-        return PBKDF2.pbkdf2(password, salt, count, dkLen);
+        return JTestPBKDF2.execute(password, salt, count, dkLen);
     }
 
     private String replaceAddpoint(String line) {
@@ -497,8 +497,8 @@ public class ScriptScanner {
         String[] hmacArgs = extractBtwBrackets(line).split(",+");
         String text = hmacArgs[0];
         String key = hmacArgs[1];
-        HMAC hmac = new HMAC(hmacAlg);
-        return hmac.hmac(text, key);
+        JTestHMac hmac = new JTestHMac(hmacAlg);
+        return hmac.execute(text, key);
     }
 
     private String calcMulPoint(String text) {

@@ -1,28 +1,31 @@
-package Model.JTestCrypto;
+package Model.JTestCrypto.JTestPbkdf2;
 
+import Model.JTestCrypto.JTestHMac.JTestHMac;
 import Model.XToY;
 import org.bouncycastle.crypto.digests.GOST3411_2012_512Digest;
 
-public class PBKDF2 {
-    public static String pbkdf2(String password, String salt, String c,String dkLen){
+public class JTestPBKDF2 {
+    private static final int blockSize = 64;
+    private static final JTestHMac hmac = new JTestHMac(new GOST3411_2012_512Digest());
+
+    public static String execute(String password, String salt, String c, String dkLen){
         int count = Integer.parseInt(c);
-        int len = Integer.parseInt(dkLen);
-        int n = (len%64 == 0) ? len/64 : len/64 + 1;
+        int length = Integer.parseInt(dkLen);
+        int blockCount = (length + (blockSize - length % blockSize) % blockSize) / blockSize;
         byte[] p = XToY.stringToBytes(password);
         byte[] u, t, s;
-        HMAC hmacStandart = new HMAC(new GOST3411_2012_512Digest());
         StringBuilder K = new StringBuilder();
-        for (int i = 0; i < n; i++){
+        for (int i = 0; i < blockCount; i++){
             s = XToY.stringToBytes(String.format("%s%02X", salt, i));
-            u = hmacStandart.hmac(p, s);
+            u = hmac.hmac(p, s);
             t = u;
             for (int j = 0; j < count; j++){
-                u = hmacStandart.hmac(p,u);
+                u = hmac.hmac(p,u);
                 t = xorArr(t,u);
             }
             K.append(XToY.bytesToString(t));
         }
-        return K.delete(64*n-len, 64*n).toString();
+        return K.delete(64*blockCount-length, 64*blockCount).toString();
     }
 
     private static byte[] xorArr(byte[] arr, byte[] brr){
