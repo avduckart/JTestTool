@@ -1,4 +1,4 @@
-package Model.Crypto.Hash;
+package Model.Crypto.Digest;
 
 public enum DigestAlg {
     HASH_94,

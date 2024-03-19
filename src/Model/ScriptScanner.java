@@ -3,7 +3,7 @@ package Model;
 import Model.Crypto.ECPointOperation;
 import Model.Crypto.EncryptionGOST_TC26;
 import Model.Crypto.HMAC;
-import Model.Crypto.Hash.Hash;
+import Model.Crypto.Digest.Digest;
 import Model.Crypto.PBKDF2;
 import org.bouncycastle.crypto.CryptoException;
 
@@ -487,7 +487,7 @@ public class ScriptScanner {
         hashMatcher.reset();
         String hashAlg = line.substring(0,7);
         String m = extractBtwBrackets(line);
-        Hash hash = new Hash(hashAlg);
+        Digest hash = new Digest(hashAlg);
         return hash.execute(m);
     }
 

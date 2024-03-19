@@ -1,6 +1,4 @@
-package Model.Crypto.Hash;
-
-import org.bouncycastle.crypto.CryptoException;
+package Model.Crypto.Digest;
 
 public class DigestDirector {
     public static GOSTDigestFactory getFactory(DigestAlg alg) {

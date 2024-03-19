@@ -1,10 +1,9 @@
 package Model.Crypto;
 
-import Model.Crypto.Hash.DigestAlg;
-import Model.Crypto.Hash.DigestDirector;
-import Model.Crypto.Hash.Hash;
+import Model.Crypto.Digest.DigestAlg;
+import Model.Crypto.Digest.DigestDirector;
+import Model.Crypto.Digest.Digest;
 import Model.XToY;
-import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.macs.HMac;
 import org.bouncycastle.crypto.params.KeyParameter;
 
@@ -12,7 +11,7 @@ import org.bouncycastle.crypto.params.KeyParameter;
 public class HMAC {
     private HMac hmac;
 
-    public HMAC(Digest digest) {
+    public HMAC(org.bouncycastle.crypto.Digest digest) {
         hmac = new HMac(digest);
     }
 
@@ -21,7 +20,7 @@ public class HMAC {
     }
 
     public HMAC(String digest) {
-        this(Hash.typeDigestMap.get(digest));
+        this(Digest.typeDigestMap.get(digest));
     }
 
     public String hmac(String message, String key){

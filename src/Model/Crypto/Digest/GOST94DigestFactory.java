@@ -1,4 +1,4 @@
-package Model.Crypto.Hash;
+package Model.Crypto.Digest;
 
 import org.bouncycastle.crypto.ExtendedDigest;
 import org.bouncycastle.crypto.digests.GOST3411Digest;
