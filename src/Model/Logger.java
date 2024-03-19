@@ -24,7 +24,7 @@ public class Logger implements Closeable{
         return log;
     }
 
-    void append(String line) throws IOException {
+    public void append(String line) throws IOException {
         fw.write("\n" + line);
         fw.flush();
     }

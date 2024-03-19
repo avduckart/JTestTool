@@ -2,7 +2,7 @@ package Model;
 
 import javax.smartcardio.CommandAPDU;
 
-class APDUCommand {
+public class APDUCommand {
 
     /*
         Преобразование APDU-команды строки в массив байтов
@@ -42,7 +42,7 @@ class APDUCommand {
     /*
         Создание APDU-команды как объекта класса javax.smartcardio.CommandAPDU;
      */
-    static CommandAPDU create(String apduString) {
+    public static CommandAPDU create(String apduString) {
         int APDU_HEAD_LENGTH;                   // длина заглавия APDU-команды
         if(apduString.length() > 8)            // если длина APDU-команды как строки больше 8ми
             APDU_HEAD_LENGTH = 5;               // то длина заголовка APDU-команды - 5
@@ -77,7 +77,7 @@ class APDUCommand {
     /*
         Представление javax.smartcardio.CommandAPDU строкой
      */
-    static String view(CommandAPDU apduCommand) {
+    public static String view(CommandAPDU apduCommand) {
         StringBuilder strBuilder = new StringBuilder("");
         int bodyStringsCount;                               // количество строк в отображении тела APDU-команды
         int APDU_HEAD_LENGTH;                               // длина заглавия APDU-команды

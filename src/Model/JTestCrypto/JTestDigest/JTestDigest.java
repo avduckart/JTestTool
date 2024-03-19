@@ -12,9 +12,9 @@ public class JTestDigest {
 
     static {
         typeDigestMap = new HashMap<>();
-        typeDigestMap.put("hash094", DigestAlg.HASH_94);
-        typeDigestMap.put("hash256", DigestAlg.HASH_2012_256);
-        typeDigestMap.put("hash512", DigestAlg.HASH_2012_512);
+        typeDigestMap.put("094", DigestAlg.HASH_94);
+        typeDigestMap.put("256", DigestAlg.HASH_2012_256);
+        typeDigestMap.put("512", DigestAlg.HASH_2012_512);
     }
 
     public JTestDigest(DigestAlg alg){

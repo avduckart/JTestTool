@@ -32,7 +32,7 @@ public class APDUResponse{
         return strBuilder.toString();
     }
 
-    static String toString(ResponseAPDU response){
+    public static String toString(ResponseAPDU response){
         StringBuilder strBuilder = new StringBuilder("");
         if(response != null) {
             byte[] bytes = response.getBytes();
