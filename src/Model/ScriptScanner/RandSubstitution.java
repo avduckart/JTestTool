@@ -6,9 +6,18 @@ import java.util.regex.Pattern;
 public final class RandSubstitution extends Substitution{
     private final String regExp = "rand\\(\\d+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static Substitution instance = new RandSubstitution();
+    private final static RandSubstitution instance = new RandSubstitution();
 
     private RandSubstitution(){
+    }
+
+    public static RandSubstitution getInstance(String line){
+        instance.reset(line);
+        return instance;
+    }
+
+    public static Substitution getInstance(){
+        return instance;
     }
 
     @Override
@@ -16,5 +25,20 @@ public final class RandSubstitution extends Substitution{
         matcher.reset();
         int byteLength = Integer.parseInt(text);
         return String.format("%02X", (int)(Math.random()*256*byteLength));
+    }
+
+    @Override
+    protected String getRegExp() {
+        return regExp;
+    }
+
+    @Override
+    protected Matcher getMatcher() {
+        return matcher;
+    }
+
+    @Override
+    protected void reset(String line) {
+        matcher.reset(line);
     }
 }

@@ -1,38 +1,71 @@
 package Model.ScriptScanner;
 
+import Model.APDUTestException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class ValueSubstitution extends Substitution{
     private final String regExp = "value\\(\\d+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static Substitution instance = new ValueSubstitution();
+    private final static ValueSubstitution instance = new ValueSubstitution();
 
     private ValueSubstitution(){
     }
 
-    @Override
-    protected String execute(int num){
-        String length;
-        int pos = 0;
-        int addLen = 0;
-        for(int i = 1; i < num; i++){
-            length = extractBtwBrackets(expectedResponse.substring(pos));
-            addLen += 2*Integer.parseInt(length);
-            pos += expectedResponse.indexOf('L') + 1;
-        }
-        String substr = expectedResponse.substring(pos);
-        int from = pos + substr.indexOf('(') + addLen - 4*(num-1);
-        length = extractBtwBrackets(substr);
-        return receivedResponse.substring(from, from + 2*Integer.parseInt(length));
+    public static ValueSubstitution getInstance(String line){
+        instance.reset(line);
+        return instance;
+    }
+
+    public static Substitution getInstance(){
+        return instance;
     }
 
     @Override
-    protected String execute(String str) {
-        return "";
+    protected String execute(String line){
+//        matcher.reset();
+//        extractValueFromResponse(Integer.parseInt(extractBtwBrackets(value)));
+//        receivedResponse
+//        String value;
+//        while(matcher.find()) {
+//            value = matcher.group();
+//            line = line.replaceFirst("value\\(\\d+\\)", extractValueFromResponse(Integer.parseInt(extractBtwBrackets(value))));
+//            matcher.reset();
+//        }
+
+        return "line";
     }
 
-    public Matcher getMatcher() {
+//    private String extractValueFromResponse(int num){
+//        String length;
+//        int pos = 0;
+//        int addLen = 0;
+//        for(int i = 1; i < num; i++){
+//            length = extractBtwBrackets(expectedResponse.substring(pos));
+//            addLen += 2*Integer.parseInt(length);
+//            pos += expectedResponse.indexOf('L') + 1;
+//        }
+//        String substr = expectedResponse.substring(pos);
+//        int from = pos + substr.indexOf('(') + addLen - 4*(num-1);
+//        length = extractBtwBrackets(substr);
+//        return receivedResponse.substring(from, from + 2*Integer.parseInt(length));
+//    }
+
+
+
+    @Override
+    protected String getRegExp() {
+        return regExp;
+    }
+
+    @Override
+    protected Matcher getMatcher() {
         return matcher;
+    }
+
+    @Override
+    protected void reset(String line) {
+        matcher.reset(line);
     }
 }

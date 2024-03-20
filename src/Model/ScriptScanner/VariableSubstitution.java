@@ -7,9 +7,18 @@ import java.util.regex.Pattern;
 public final class VariableSubstitution extends Substitution {
     private final String regExp = "%\\w+%";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static Substitution instance = new VariableSubstitution();
+    private final static VariableSubstitution instance = new VariableSubstitution();
 
     private VariableSubstitution(){
+    }
+
+    public static VariableSubstitution getInstance(String line){
+        instance.reset(line);
+        return instance;
+    }
+
+    public static Substitution getInstance(){
+        return instance;
     }
 
     @Override
@@ -31,5 +40,20 @@ public final class VariableSubstitution extends Substitution {
         while(varDeclMatcher.find())
             varList.add(varDeclMatcher.group());
         return varList;
+    }
+
+    @Override
+    protected String getRegExp() {
+        return regExp;
+    }
+
+    @Override
+    protected Matcher getMatcher() {
+        return matcher;
+    }
+
+    @Override
+    protected void reset(String line) {
+        matcher.reset(line);
     }
 }

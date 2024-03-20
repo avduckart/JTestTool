@@ -8,9 +8,18 @@ import java.util.regex.Pattern;
 public final class HashSubstitution extends Substitution{
     private final String regExp = "hash(094|256|512)\\([\\dA-F]+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static Substitution instance = new HashSubstitution();
+    private final static HashSubstitution instance = new HashSubstitution();
 
     private HashSubstitution(){
+    }
+
+    public static HashSubstitution getInstance(String line){
+        instance.reset(line);
+        return instance;
+    }
+
+    public static Substitution getInstance(){
+        return instance;
     }
 
     @Override
@@ -21,5 +30,20 @@ public final class HashSubstitution extends Substitution{
         JTestDigest digest = new JTestDigest(JTestDigest.typeDigestMap.get(hashAlg));
 
         return digest.execute(message);
+    }
+
+    @Override
+    protected String getRegExp() {
+        return regExp;
+    }
+
+    @Override
+    protected Matcher getMatcher() {
+        return matcher;
+    }
+
+    @Override
+    protected void reset(String line) {
+        matcher.reset(line);
     }
 }

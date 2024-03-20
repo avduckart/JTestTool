@@ -6,9 +6,18 @@ import java.util.regex.Pattern;
 public final class DeclarationSubstitution extends Substitution{
     private final String regExp = "^(%\\w+%)=";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private static final Substitution instance = new DeclarationSubstitution();
+    private static final DeclarationSubstitution instance = new DeclarationSubstitution();
 
     private DeclarationSubstitution(){
+    }
+
+    public static Substitution getInstance(String line){
+        instance.reset(line);
+        return instance;
+    }
+
+    public static Substitution getInstance(){
+        return instance;
     }
 
     @Override
@@ -18,7 +27,13 @@ public final class DeclarationSubstitution extends Substitution{
 
     @Override
     public String replace(String line) {
-        String key = line.substring(line.indexOf('%'), line.indexOf('='));
+        int begin = line.indexOf('%');
+        int end = line.indexOf('=');
+
+        if(begin == -1 || end == -1)
+            return line;
+
+        String key = line.substring(begin, end);
         String value = line.substring(line.indexOf('=') + 1);
 
         ValueSubstitution valueSubst = (ValueSubstitution) ValueSubstitution.getInstance(line);
@@ -29,5 +44,20 @@ public final class DeclarationSubstitution extends Substitution{
         variablesMap.put(key, value);
 
         return line;
+    }
+
+    @Override
+    protected String getRegExp() {
+        return regExp;
+    }
+
+    @Override
+    protected Matcher getMatcher() {
+        return matcher;
+    }
+
+    @Override
+    protected void reset(String line) {
+        matcher.reset(line);
     }
 }

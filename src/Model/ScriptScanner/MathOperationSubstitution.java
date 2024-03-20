@@ -10,9 +10,18 @@ import static Model.Calculation.Calculator.operator;
 public final class MathOperationSubstitution extends Substitution{
     private final String regExp = "\\([\\dA-F]+[+*\\-/%][\\dA-F]+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static Substitution instance = new MathOperationSubstitution();
+    private final static MathOperationSubstitution instance = new MathOperationSubstitution();
 
     private MathOperationSubstitution(){
+    }
+
+    public static MathOperationSubstitution getInstance(String line){
+        instance.reset(line);
+        return instance;
+    }
+
+    public static Substitution getInstance(){
+        return instance;
     }
 
     @Override
@@ -44,5 +53,20 @@ public final class MathOperationSubstitution extends Substitution{
 
     private String calculate(String arg1, String arg2, char op) throws APDUTestException {
         return operator(op, arg1, arg2);
+    }
+
+    @Override
+    protected String getRegExp() {
+        return regExp;
+    }
+
+    @Override
+    protected Matcher getMatcher() {
+        return matcher;
+    }
+
+    @Override
+    protected void reset(String line) {
+        matcher.reset(line);
     }
 }

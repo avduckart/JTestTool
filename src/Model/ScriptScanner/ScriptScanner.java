@@ -21,9 +21,17 @@ public class ScriptScanner {
 
     private String testRegExp = "^[\\dA-F()]+,+([\\dA-F]|(\\(\\d+(,\\d+)?\\)L))+$";
     Pattern testPattern = Pattern.compile(testRegExp);
-    private Matcher testMatcher = testPattern.matcher(null/*s*/);
+    private Matcher testMatcher;// = testPattern.matcher(null/*s*/);
     private int failCount = 0;
     private int errorCount = 0;
+
+    private final Substitution[] substitutions = {
+            DeclarationSubstitution.getInstance(), ValueSubstitution.getInstance(), VariableSubstitution.getInstance(),
+            MathOperationSubstitution.getInstance(), HashSubstitution.getInstance(), HmacSubstitution.getInstance(),
+            Pbkdf2Substitution.getInstance(), CfbSubstitution.getInstance() , EcbSubstitution.getInstance(), RandSubstitution.getInstance(),
+            SubstringSubstitution.getInstance(), InvertSubstitution.getInstance(), MultiplePointSubstitution.getInstance(),
+            SumPointSubstitution.getInstance(), DiversifySubstitution.getInstance()
+    };
 
     private ScriptScanner(File scriptFile) {
         this.scriptFile = scriptFile;
@@ -73,12 +81,6 @@ public class ScriptScanner {
     }
 
     private void processLine(Logger logger, String line) throws APDUTestException, CardException, IOException {
-        Substitution[] substitutions = {
-                DeclarationSubstitution.getInstance(line), ValueSubstitution.getInstance(line), VariableSubstitution.getInstance(line),
-                MathOperationSubstitution.getInstance(line), HashSubstitution.getInstance(line), HmacSubstitution.getInstance(line),
-                Pbkdf2Substitution.getInstance(line), CfbSubstitution.getInstance(line) , EcbSubstitution.getInstance(line), RandSubstitution.getInstance(line),
-                SubstringSubstitution.getInstance(line), InvertSubstitution.getInstance(line), MultiplePointSubstitution.getInstance(line),
-                SumPointSubstitution.getInstance(line), DiversifySubstitution.getInstance(line)};
 
         int match;
         do {
@@ -90,6 +92,7 @@ public class ScriptScanner {
             }
         }while(match != 0);
 
+        testMatcher = testPattern.matcher(line);
         if(testMatcher.matches()) {
             testMatcher.reset();
             executeTest(logger, line);
