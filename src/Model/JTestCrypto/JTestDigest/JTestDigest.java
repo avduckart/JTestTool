@@ -1,6 +1,6 @@
 package Model.JTestCrypto.JTestDigest;
 
-import Model.XToY;
+import Model.Utilities;
 import org.bouncycastle.crypto.ExtendedDigest;
 import org.bouncycastle.util.Arrays;
 
@@ -27,9 +27,9 @@ public class JTestDigest {
 
     public String execute(String message){
         byte[] hash = new byte[digest.getByteLength()];
-        byte[] msg = XToY.stringToBytes(message);
+        byte[] msg = Utilities.stringToBytes(message);
         hashCalculate(msg, hash);
-        return XToY.bytesToString(Arrays.reverse(hash));
+        return Utilities.bytesToString(Arrays.reverse(hash));
     }
 
     private void hashCalculate(byte[] message, byte[] hash) {

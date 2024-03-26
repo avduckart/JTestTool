@@ -1,6 +1,6 @@
 package Model;
 
-public class XToY {
+public class Utilities {
     public static String bytesToString(byte[] bytes){
         StringBuilder result = new StringBuilder();
         for (byte b : bytes)

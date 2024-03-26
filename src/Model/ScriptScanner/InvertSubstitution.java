@@ -1,6 +1,6 @@
 package Model.ScriptScanner;
 
-import Model.XToY;
+import Model.Utilities;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +25,7 @@ public final class InvertSubstitution extends Substitution{
     @Override
     protected String execute(String text) {
         matcher.reset();
-        byte[] bytes = XToY.stringToBytes(text);
+        byte[] bytes = Utilities.stringToBytes(text);
         int length = bytes.length;
         byte tmp;
         for (int i = 0; i < length/2; i++){
@@ -33,7 +33,7 @@ public final class InvertSubstitution extends Substitution{
             bytes[i] = bytes[length - 1 - i];
             bytes[length - 1 - i] = tmp;
         }
-        return XToY.bytesToString(bytes);
+        return Utilities.bytesToString(bytes);
     }
 
     @Override

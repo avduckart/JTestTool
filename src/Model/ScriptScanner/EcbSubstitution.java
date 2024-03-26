@@ -1,7 +1,7 @@
 package Model.ScriptScanner;
 
 import Model.JTestCrypto.EncryptionGOST_TC26;
-import Model.XToY;
+import Model.Utilities;
 import org.bouncycastle.crypto.CryptoException;
 
 import java.util.regex.Matcher;
@@ -29,11 +29,11 @@ public final class EcbSubstitution extends Substitution{
         matcher.reset();
         boolean toEncrypt = message.charAt(0) == 'e';
         String[] textAndKey = extractBtwBrackets(message).split(",+");
-        byte[] text = XToY.stringToBytes(textAndKey[0]);
-        byte[] key = XToY.stringToBytes(textAndKey[1]);
+        byte[] text = Utilities.stringToBytes(textAndKey[0]);
+        byte[] key = Utilities.stringToBytes(textAndKey[1]);
         EncryptionGOST_TC26 cipher = new EncryptionGOST_TC26();
         try {
-            return XToY.bytesToString(cipher.ecb(text, key, toEncrypt));
+            return Utilities.bytesToString(cipher.ecb(text, key, toEncrypt));
         } catch (CryptoException e) {
             throw new RuntimeException(e);
         }

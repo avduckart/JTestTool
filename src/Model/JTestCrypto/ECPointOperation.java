@@ -2,7 +2,7 @@ package Model.JTestCrypto;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import Model.XToY;
+import Model.Utilities;
 import org.bouncycastle.math.ec.*;
 
 public class ECPointOperation {
@@ -94,10 +94,10 @@ public class ECPointOperation {
     }
 
     public static String getMultipledPoint(String point, String multiplier){
-        byte[] pointB = XToY.stringToBytes(point);
-        byte[] mul = XToY.stringToBytes(multiplier);
+        byte[] pointB = Utilities.stringToBytes(point);
+        byte[] mul = Utilities.stringToBytes(multiplier);
         multiplyPoint(pointB, (short)0, mul, (short)0);
-        return XToY.bytesToString(pointB);
+        return Utilities.bytesToString(pointB);
     }
 
     public static String diverseKey(String UKM, String CK, String OK){
@@ -108,9 +108,9 @@ public class ECPointOperation {
     }
 
     public static String sumPoint(String point1, String point2) {
-        byte[] A = XToY.stringToBytes(point1);
-        byte[] B = XToY.stringToBytes(point2);
+        byte[] A = Utilities.stringToBytes(point1);
+        byte[] B = Utilities.stringToBytes(point2);
         addPoints(A, (short)0, B, (short)0);
-        return XToY.bytesToString(A);
+        return Utilities.bytesToString(A);
     }
 }
