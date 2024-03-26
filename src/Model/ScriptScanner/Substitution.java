@@ -10,7 +10,10 @@ abstract public class Substitution {
     abstract protected String execute(String str);
     abstract protected String getRegExp();
     abstract protected Matcher getMatcher();
-    abstract protected void reset(String line);
+
+    protected void reset(String line){
+        getMatcher().reset(line);
+    }
 
     protected String extractBtwBrackets(String s){
         int firstInd = s.indexOf('(');

@@ -40,9 +40,4 @@ public final class SumPointSubstitution extends Substitution{
     protected Matcher getMatcher() {
         return matcher;
     }
-
-    @Override
-    protected void reset(String line) {
-        matcher.reset(line);
-    }
 }
