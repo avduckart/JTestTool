@@ -16,8 +16,6 @@ public class ScriptScanner {
     static private int counter = 0;
 
     private File scriptFile;
-    private String receivedResponse = "";
-    private String expectedResponse = "";
 
     private String testRegExp = "^[\\dA-F()]+,+([\\dA-F]|(\\(\\d+(,\\d+)?\\)L))+$";
     Pattern testPattern = Pattern.compile(testRegExp);
@@ -32,6 +30,7 @@ public class ScriptScanner {
             SubstringSubstitution.getInstance(), InvertSubstitution.getInstance(), MultiplePointSubstitution.getInstance(),
             SumPointSubstitution.getInstance(), DiversifySubstitution.getInstance()
     };
+    private String expectedResponse = "";
 
     private ScriptScanner(File scriptFile) {
         this.scriptFile = scriptFile;
@@ -44,7 +43,7 @@ public class ScriptScanner {
     /*
         Выполнение сценария .s
      */
-    public void scanAndExecuteTest(Logger logger) throws IOException, CardException {
+    public void scanAndExecuteTest() throws IOException, CardException {
         String info = "^>.*";
         String comment = "^#.*";
         Scanner scanner = new Scanner(scriptFile);
@@ -55,7 +54,7 @@ public class ScriptScanner {
         currentLine = scanner.nextLine();
         while (scanner.hasNextLine()) {
             if(currentLine.matches(info)) {
-                outputToLog(currentLine, logger);
+                outputToConsole(currentLine);
                 while (scanner.hasNextLine() && (!(currentLine = scanner.nextLine()).matches(info))) {
                     count++;
                     if(!currentLine.matches(comment))
@@ -63,24 +62,24 @@ public class ScriptScanner {
                 }
             }
             try {
-                executeTestSequence(commandSequence.toString(), logger);
+                executeTestSequence(commandSequence.toString());
                 commandSequence.delete(0, commandSequence.length());
             }
             catch (APDUTestException e){
-                outputToLog(String.format("Uncorrected Test in string with number %d\n", count), logger);
+                outputToConsole(String.format("Uncorrected Test in string with number %d\n", count));
                 break;
             }
         }
         scanner.close();
     }
 
-    private void executeTestSequence(String commandTestSequence, Logger logger) throws IOException, CardException, APDUTestException {
+    private void executeTestSequence(String commandTestSequence) throws CardException, APDUTestException {
         String[] lines = commandTestSequence.replaceAll("\\s+","").split(";+");
         for (String line : lines)
-            processLine(logger, line);
+            processLine(line);
     }
 
-    private void processLine(Logger logger, String line) throws APDUTestException, CardException, IOException {
+    private void processLine(String line) throws APDUTestException, CardException {
 
         int match;
         do {
@@ -95,13 +94,13 @@ public class ScriptScanner {
         testMatcher = testPattern.matcher(line);
         if(testMatcher.matches()) {
             testMatcher.reset();
-            executeTest(logger, line);
+            executeTest(line);
         }
     }
 
-    private void executeTest(Logger logger, String line) throws APDUTestException, CardException, IOException {
-        System.out.println("  № " + ++counter);
-        runAndCompare(line, logger);
+    private void executeTest(String line) throws APDUTestException, CardException {
+        outputToConsole("  № " + ++counter);
+        runAndCompare(line);
         expectedResponse = getExpectedResponseFromTest(line);
     }
 
@@ -112,49 +111,43 @@ public class ScriptScanner {
         return strArr[1];
     }
 
-    private void runAndCompare(String apduPair, Logger logger) throws CardException, IOException {
-        String[] commandAndResult;
-        String command;
-        String expectedResponse;
-        ResponseAPDU apduResponse;
-        boolean result;
-
-        commandAndResult = apduPair.split(",+", 2);
+    private void runAndCompare(String apduPair) throws CardException {
         try {
+            String[] commandAndResult = apduPair.split(",+", 2);
             if(commandAndResult.length != 2)
                 throw new APDUTestException();
-            command = commandAndResult[0];
-            expectedResponse = commandAndResult[1];
+            String command = commandAndResult[0];
+            String expectedResponse = commandAndResult[1];
             expectedResponse = replaceExpectedLengthToRegExp(expectedResponse);
-            apduResponse = runCommandAndReflect(logger, command);
-            receivedResponse = APDUResponse.toString(apduResponse);
-            result = compareToExpectedResult(expectedResponse, receivedResponse, logger);
+            ResponseAPDU apduResponse = runCommandAndReflect(command);
+            String receivedResponse = APDUResponse.toString(apduResponse);
+            boolean result = compare(expectedResponse, receivedResponse);
             if(!result)
                 failCount++;
         } catch (APDUTestException e) {
             e.printStackTrace(apduPair);
-            errorCount += 1;
+            errorCount++;
         }
     }
 
-    private ResponseAPDU runCommandAndReflect(Logger logger, String command) throws IOException, CardException {
+    private ResponseAPDU runCommandAndReflect(String command) throws CardException {
         CommandAPDU apduCommand = APDUCommand.create(command);
-        outputToLog(APDUCommand.view(apduCommand), logger);
+        outputToConsole(APDUCommand.view(apduCommand));
         ResponseAPDU apduResponse = Loader.getChannel().transmit(apduCommand);
-        outputToLog(APDUResponse.view(apduResponse), logger);
+        outputToConsole(APDUResponse.view(apduResponse));
         return apduResponse;
     }
 
-    private boolean compareToExpectedResult(String expectedResponse, String gettingResult, Logger logger) throws IOException {
+    private boolean compare(String expectedResponse, String gettingResult) {
         boolean result = gettingResult.matches(expectedResponse);
-        reflectResult(result, logger);
+        outputToConsole(result ? "  COMPLETE\n\n" : "  FAILURE\n\n");
         return result;
     }
 
     private String extractBtwBrackets(String s){
         int firstInd = s.indexOf('(');
         int secondInd = firstInd + s.substring(firstInd).indexOf(')');
-        return  s.substring(firstInd + 1, secondInd);
+        return s.substring(firstInd + 1, secondInd);
     }
 
     private String replaceExpectedLengthToRegExp(String expectedResponse) {
@@ -171,18 +164,8 @@ public class ScriptScanner {
         return expectedResponse;
     }
 
-    private void outputToLog(String line, Logger logger) throws IOException {
-        outputToConsole(line);
-        if(logger != null)
-            logger.writeLine(line);
-    }
-
     private void outputToConsole(String line){
         System.out.println(line);
-    }
-
-    private void reflectResult(boolean bool, Logger logger) throws IOException {
-            outputToLog(bool ? "  COMPLETE\n\n" : "  FAILURE\n\n", logger);
     }
 
     public int getErrorCount() {

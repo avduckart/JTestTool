@@ -1,7 +1,6 @@
 package gui.Forms;
 
 import Model.Loader;
-import Model.Logger;
 import org.bouncycastle.crypto.CryptoException;
 
 import javax.smartcardio.CardException;
@@ -45,10 +44,8 @@ public class MainForm {
                 File log = new File(String.format("%s %s",
                         new SimpleDateFormat("MM-dd-yyyy hh-mm-ss").format(new Date()),
                         script.getPath().substring(script.getPath().lastIndexOf('\\') + 1)));
-                Logger logger = null;
                 try {
-                    logger = new Logger(log);
-                    Loader.scriptExecute(script.getPath(), logger);
+                    Loader.scriptExecute(script.getPath());
                     String text = FileUtils.read(log);
                     logTextPane.setText(text);
                 } catch (IOException e1) {

@@ -42,7 +42,6 @@ public class Loader {
         String value;
         ResponseAPDU apduResponse;
         CommandAPDU apduCommand;
-        Logger logger = null;
 
         /*
             command regime value [log]
@@ -76,26 +75,19 @@ public class Loader {
                         File log = new File(String.format("%s %s",
                                 new SimpleDateFormat("MM-dd-yyyy hh-mm-ss").format(new Date()),
                                 "QWER" /* scriptPath.substring(scriptPath.lastIndexOf('\\') + 1))*/));
-                        logger = new Logger(log);
                         if(regime.equals("-f"))
                             scriptPath = value + "\\" + scriptPath;
-                        scriptExecute(scriptPath, logger);
+                        scriptExecute(scriptPath);
                     }
                 }
             } else
                 System.out.println("Uncorrected command");
-            if (logger != null)
-                logger.close();
         }
     }
 
-    public static void scriptExecute(String scriptPath, Logger logger) throws CardException, IOException, CryptoException {
+    public static void scriptExecute(String scriptPath) throws CardException, IOException, CryptoException {
         ScriptScanner scriptScanner = new ScriptScanner(scriptPath);
-        if(logger != null)
-            logger.writeHeader();
-        scriptScanner.scanAndExecuteTest(logger);
-        if(logger != null)
-            logger.writeTail(scriptScanner.getErrorCount(), scriptScanner.getFailCount());
+        scriptScanner.scanAndExecuteTest();
     }
 
     @Nullable
