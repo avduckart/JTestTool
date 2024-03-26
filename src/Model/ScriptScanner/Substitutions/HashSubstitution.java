@@ -1,4 +1,4 @@
-package Model.ScriptScanner;
+package Model.ScriptScanner.Substitutions;
 
 import Model.JTestCrypto.JTestDigest.JTestDigest;
 

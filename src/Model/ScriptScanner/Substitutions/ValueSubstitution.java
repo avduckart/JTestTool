@@ -1,6 +1,4 @@
-package Model.ScriptScanner;
-
-import Model.APDUTestException;
+package Model.ScriptScanner.Substitutions;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

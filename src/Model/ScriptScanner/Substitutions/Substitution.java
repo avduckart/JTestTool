@@ -1,4 +1,4 @@
-package Model.ScriptScanner;
+package Model.ScriptScanner.Substitutions;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -11,7 +11,7 @@ abstract public class Substitution {
     abstract protected String getRegExp();
     abstract protected Matcher getMatcher();
 
-    protected void reset(String line){
+    public void reset(String line){
         getMatcher().reset(line);
     }
 

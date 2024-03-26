@@ -1,4 +1,4 @@
-package Model.ScriptScanner;
+package Model.ScriptScanner.Substitutions;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

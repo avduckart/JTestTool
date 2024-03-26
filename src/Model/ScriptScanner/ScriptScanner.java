@@ -1,6 +1,7 @@
 package Model.ScriptScanner;
 
 import Model.*;
+import Model.ScriptScanner.Substitutions.*;
 
 import javax.smartcardio.CardException;
 import javax.smartcardio.CommandAPDU;
