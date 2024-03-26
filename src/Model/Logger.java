@@ -8,46 +8,33 @@ import java.util.Date;
 
 public class Logger implements Closeable{
 
-    private File log;
     private FileWriter fw;
 
     public Logger(File log) throws IOException {
-        this.log = log;
         fw = new FileWriter(log);
     }
 
-    Logger(String logPath) throws IOException {
-        this(new File(logPath));
+    private void writeStreak() throws IOException {
+        writeLine("_______________________________________________________\n\n");
     }
 
-    public File getLog() {
-        return log;
-    }
-
-    public void append(String line) throws IOException {
+    private void writeLine(String line) throws IOException {
         fw.write("\n" + line);
         fw.flush();
     }
 
-    void writeHeader() throws IOException {
-        append("_______________________________________________________\n\n");
-        append(String.format("\t%s\n", Loader.getTerminal().toString()));
-        append(String.format("\t%s\n", new Date().toString()));
-        append("_______________________________________________________\n\n");
+    public void writeHeader() throws IOException {
+        writeStreak();
+        writeLine(String.format("\t%s\n", Loader.getTerminal()));
+        writeLine(String.format("\t%s\n", new Date()));
+        writeStreak();
     }
 
-    void writeTail(int countError, int countFail) throws IOException {
-        append("_______________________________________________________\n\n");
-        append(String.format("\tERROR : %d\n", countError));
-        append(String.format("\tFAILURE : %d\n", countFail));
-        append("_______________________________________________________\n\n");
-    }
-
-    void recordResult(boolean result) throws IOException {
-        if(result)
-            append("  COMPLETE\n\n");
-        else
-            append("  FAILURE\n\n");
+    public void writeTail(int countError, int countFail) throws IOException {
+        writeStreak();
+        writeLine(String.format("\tERROR : %d\n", countError));
+        writeLine(String.format("\tFAILURE : %d\n", countFail));
+        writeStreak();
     }
 
     @Override

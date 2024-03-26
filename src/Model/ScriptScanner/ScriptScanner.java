@@ -55,7 +55,7 @@ public class ScriptScanner {
         currentLine = scanner.nextLine();
         while (scanner.hasNextLine()) {
             if(currentLine.matches(info)) {
-                reflectToLog(currentLine, logger);
+                outputToLog(currentLine, logger);
                 while (scanner.hasNextLine() && (!(currentLine = scanner.nextLine()).matches(info))) {
                     count++;
                     if(!currentLine.matches(comment))
@@ -67,7 +67,7 @@ public class ScriptScanner {
                 commandSequence.delete(0, commandSequence.length());
             }
             catch (APDUTestException e){
-                reflectToLog(String.format("Uncorrected Test in string with number %d\n", count), logger);
+                outputToLog(String.format("Uncorrected Test in string with number %d\n", count), logger);
                 break;
             }
         }
@@ -139,9 +139,9 @@ public class ScriptScanner {
 
     private ResponseAPDU runCommandAndReflect(Logger logger, String command) throws IOException, CardException {
         CommandAPDU apduCommand = APDUCommand.create(command);
-        reflectToLog(APDUCommand.view(apduCommand), logger);
+        outputToLog(APDUCommand.view(apduCommand), logger);
         ResponseAPDU apduResponse = Loader.getChannel().transmit(apduCommand);
-        reflectToLog(APDUResponse.view(apduResponse), logger);
+        outputToLog(APDUResponse.view(apduResponse), logger);
         return apduResponse;
     }
 
@@ -171,21 +171,18 @@ public class ScriptScanner {
         return expectedResponse;
     }
 
-    private void reflectToLog(String line, Logger logger) throws IOException {
-        reflect(line);
+    private void outputToLog(String line, Logger logger) throws IOException {
+        outputToConsole(line);
         if(logger != null)
-            logger.append(line);
+            logger.writeLine(line);
     }
 
-    private void reflect(String line){
+    private void outputToConsole(String line){
         System.out.println(line);
     }
 
     private void reflectResult(boolean bool, Logger logger) throws IOException {
-        if(bool)
-            reflectToLog("  COMPLETE\n\n", logger);
-        else
-            reflectToLog("  FAILURE\n\n", logger);
+            outputToLog(bool ? "  COMPLETE\n\n" : "  FAILURE\n\n", logger);
     }
 
     public int getErrorCount() {
