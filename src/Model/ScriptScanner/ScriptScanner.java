@@ -44,29 +44,28 @@ public class ScriptScanner {
     /*
         Выполнение сценария .s
      */
-    public void scanAndExecuteTest() throws IOException, CardException {
+    public void scan() throws IOException, CardException {
         String info = "^>.*";
         String comment = "^#.*";
         Scanner scanner = new Scanner(scriptFile);
-        StringBuilder commandSequence = new StringBuilder();
-        String currentLine = scanner.nextLine();
-        int count = 0;
+        int num = 0;
 
-        while(scanner.hasNextLine()) {
+        for(String currentLine = scanner.nextLine(); scanner.hasNextLine(); currentLine = scanner.nextLine()) {
+            num++;
+
+            if(currentLine.matches(comment))
+                continue;
+
             if(currentLine.matches(info)) {
                 outputToConsole(currentLine);
-                while (scanner.hasNextLine() && (!(currentLine = scanner.nextLine()).matches(info))) {
-                    count++;
-                    if(!currentLine.matches(comment))
-                        commandSequence.append(currentLine);
-                }
+                continue;
             }
+
             try {
-                executeTestSequence(commandSequence.toString());
-                commandSequence.delete(0, commandSequence.length());
+                executeTestSequence(currentLine);
             }
             catch (APDUTestException e){
-                outputToConsole(String.format("Uncorrected Test in string with number %d\n", count));
+                outputToConsole(String.format("Uncorrected Test in string with number %d\n", num));
                 break;
             }
         }

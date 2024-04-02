@@ -87,7 +87,7 @@ public class Loader {
 
     public static void scriptExecute(String scriptPath) throws CardException, IOException, CryptoException {
         ScriptScanner scriptScanner = new ScriptScanner(scriptPath);
-        scriptScanner.scanAndExecuteTest();
+        scriptScanner.scan();
     }
 
     @Nullable
