@@ -8,18 +8,8 @@ import java.util.regex.Pattern;
 public final class InvertSubstitution extends Substitution{
     private final String regExp = "invert\\([\\dA-F]+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static InvertSubstitution instance = new InvertSubstitution();
 
-    private InvertSubstitution(){
-    }
-
-    public static InvertSubstitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public InvertSubstitution(){
     }
 
     @Override

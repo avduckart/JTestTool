@@ -6,18 +6,8 @@ import java.util.regex.Pattern;
 public final class SubstringSubstitution extends Substitution{
     private static final String regExp = "substr\\([\\dA-F]+,\\d+,\\d+\\)";
     private Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static SubstringSubstitution instance = new SubstringSubstitution();
 
-    private SubstringSubstitution(){
-    }
-
-    public static SubstringSubstitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public SubstringSubstitution(){
     }
 
     @Override

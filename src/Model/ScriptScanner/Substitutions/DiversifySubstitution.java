@@ -8,18 +8,8 @@ import java.util.regex.Pattern;
 public final class DiversifySubstitution extends Substitution{
     private final String regExp = "diverse\\([\\dA-F]+,[\\dA-F]{64},[\\dA-F]{128}\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static DiversifySubstitution instance = new DiversifySubstitution();
 
-    private DiversifySubstitution(){
-    }
-
-    public static DiversifySubstitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public DiversifySubstitution(){
     }
 
     @Override

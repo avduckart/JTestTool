@@ -8,18 +8,8 @@ import java.util.regex.Pattern;
 public final class Pbkdf2Substitution extends Substitution{
     private final String regExp = "pbkdf2\\([\\dA-F]+,[\\dA-F]+,\\d+,\\d+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static Pbkdf2Substitution instance = new Pbkdf2Substitution();
 
-    private Pbkdf2Substitution(){
-    }
-
-    public static Pbkdf2Substitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public Pbkdf2Substitution(){
     }
 
     @Override

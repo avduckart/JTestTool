@@ -6,18 +6,8 @@ import java.util.regex.Pattern;
 public final class RandSubstitution extends Substitution{
     private final String regExp = "rand\\(\\d+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static RandSubstitution instance = new RandSubstitution();
 
-    private RandSubstitution(){
-    }
-
-    public static RandSubstitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public RandSubstitution(){
     }
 
     @Override

@@ -10,18 +10,8 @@ import java.util.regex.Pattern;
 public final class EcbSubstitution extends Substitution{
     private final String regExp = "[ed]{1}ecb\\([\\dA-F]+,[\\dA-F]{64}\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static EcbSubstitution instance = new EcbSubstitution();
 
-    private EcbSubstitution(){
-    }
-
-    public static EcbSubstitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public EcbSubstitution(){
     }
 
     @Override

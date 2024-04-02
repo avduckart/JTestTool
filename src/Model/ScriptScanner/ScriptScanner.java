@@ -25,11 +25,11 @@ public class ScriptScanner {
     private int errorCount = 0;
 
     private final Substitution[] substitutions = {
-            DeclarationSubstitution.getInstance(), ValueSubstitution.getInstance(), VariableSubstitution.getInstance(),
-            MathOperationSubstitution.getInstance(), HashSubstitution.getInstance(), HmacSubstitution.getInstance(),
-            Pbkdf2Substitution.getInstance(), CfbSubstitution.getInstance() , EcbSubstitution.getInstance(), RandSubstitution.getInstance(),
-            SubstringSubstitution.getInstance(), InvertSubstitution.getInstance(), MultiplePointSubstitution.getInstance(),
-            SumPointSubstitution.getInstance(), DiversifySubstitution.getInstance()
+            new DeclarationSubstitution(), new ValueSubstitution(), new VariableSubstitution(),
+            new MathOperationSubstitution(), new HashSubstitution(), new HmacSubstitution(),
+            new Pbkdf2Substitution(), new CfbSubstitution() , new EcbSubstitution(), new RandSubstitution(),
+            new SubstringSubstitution(), new InvertSubstitution(), new MultiplePointSubstitution(),
+            new SumPointSubstitution(), new DiversifySubstitution()
     };
     private String expectedResponse = "";
 
@@ -48,12 +48,11 @@ public class ScriptScanner {
         String info = "^>.*";
         String comment = "^#.*";
         Scanner scanner = new Scanner(scriptFile);
-        String currentLine;
         StringBuilder commandSequence = new StringBuilder();
+        String currentLine = scanner.nextLine();
         int count = 0;
 
-        currentLine = scanner.nextLine();
-        while (scanner.hasNextLine()) {
+        while(scanner.hasNextLine()) {
             if(currentLine.matches(info)) {
                 outputToConsole(currentLine);
                 while (scanner.hasNextLine() && (!(currentLine = scanner.nextLine()).matches(info))) {
@@ -139,8 +138,8 @@ public class ScriptScanner {
         return apduResponse;
     }
 
-    private boolean compare(String expectedResponse, String gettingResult) {
-        boolean result = gettingResult.matches(expectedResponse);
+    private boolean compare(String expectedResponse, String response) {
+        boolean result = response.matches(expectedResponse);
         outputToConsole(result ? "  COMPLETE\n\n" : "  FAILURE\n\n");
         return result;
     }

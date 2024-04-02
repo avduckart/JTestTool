@@ -10,18 +10,8 @@ import java.util.regex.Pattern;
 public final class CfbSubstitution extends Substitution{
     private final String regExp = "cfb\\([\\dA-F]+,[\\dA-F]{16},[\\dA-F]{64}\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static CfbSubstitution instance = new CfbSubstitution();
 
-    private CfbSubstitution() {
-    }
-
-    public static CfbSubstitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public CfbSubstitution() {
     }
 
     @Override

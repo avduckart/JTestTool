@@ -8,18 +8,8 @@ import java.util.regex.Pattern;
 public final class MultiplePointSubstitution extends Substitution{
     private final String regExp = "mulpoint\\([\\dA-F]{128},[\\dA-F]+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-    private final static MultiplePointSubstitution instance = new MultiplePointSubstitution();
 
-    private MultiplePointSubstitution(){
-    }
-
-    public static MultiplePointSubstitution getInstance(String line){
-        instance.reset(line);
-        return instance;
-    }
-
-    public static Substitution getInstance(){
-        return instance;
+    public MultiplePointSubstitution(){
     }
 
     @Override
