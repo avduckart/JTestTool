@@ -31,7 +31,6 @@ public class ScriptScanner {
             new SubstringSubstitution(), new InvertSubstitution(), new MultiplePointSubstitution(),
             new SumPointSubstitution(), new DiversifySubstitution()
     };
-    private String expectedResponse = "";
 
     private ScriptScanner(File scriptFile) {
         this.scriptFile = scriptFile;
@@ -41,9 +40,6 @@ public class ScriptScanner {
         this(new File(scriptPath));
     }
 
-    /*
-        Выполнение сценария .s
-     */
     public void scan() throws IOException, CardException {
         String info = "^>.*";
         String comment = "^#.*";
@@ -62,7 +58,9 @@ public class ScriptScanner {
             }
 
             try {
-                executeTestSequence(currentLine);
+                String[] commands = currentLine.replaceAll("\\s+","").split(";+");
+                for (String command : commands)
+                    processLine(command);
             }
             catch (APDUTestException e){
                 outputToConsole(String.format("Uncorrected Test in string with number %d\n", num));
@@ -72,13 +70,7 @@ public class ScriptScanner {
         scanner.close();
     }
 
-    private void executeTestSequence(String commandTestSequence) throws CardException, APDUTestException {
-        String[] lines = commandTestSequence.replaceAll("\\s+","").split(";+");
-        for (String line : lines)
-            processLine(line);
-    }
-
-    private void processLine(String line) throws APDUTestException, CardException {
+    private void processLine(String line) throws APDUTestException {
 
         int match;
         do {
@@ -93,48 +85,39 @@ public class ScriptScanner {
         testMatcher = testPattern.matcher(line);
         if(testMatcher.matches()) {
             testMatcher.reset();
-            executeTest(line);
+            testRun(line);
         }
     }
 
-    private void executeTest(String line) throws APDUTestException, CardException {
+    private void testRun(String apduPair) {
         outputToConsole("  № " + ++counter);
-        runAndCompare(line);
-        expectedResponse = getExpectedResponseFromTest(line);
-    }
 
-    private String getExpectedResponseFromTest(String line) throws APDUTestException {
-        String[] strArr;
-        if((strArr = line.split(",+",2)).length != 2)
-            throw new APDUTestException();
-        return strArr[1];
-    }
+        String[] commandAndResult = apduPair.split(",+", 2);
 
-    private void runAndCompare(String apduPair) throws CardException {
-        try {
-            String[] commandAndResult = apduPair.split(",+", 2);
-            if(commandAndResult.length != 2)
-                throw new APDUTestException();
-            String command = commandAndResult[0];
-            String expectedResponse = commandAndResult[1];
-            expectedResponse = replaceExpectedLengthToRegExp(expectedResponse);
-            ResponseAPDU apduResponse = runCommandAndReflect(command);
-            String receivedResponse = APDUResponse.toString(apduResponse);
-            boolean result = compare(expectedResponse, receivedResponse);
-            if(!result)
-                failCount++;
-        } catch (APDUTestException e) {
-            e.printStackTrace(apduPair);
+        if(commandAndResult.length != 2) {
             errorCount++;
+            return;
         }
+
+        String command = commandAndResult[0];
+        String expectedResponse = commandAndResult[1];
+        expectedResponse = replaceExpectedLengthToRegExp(expectedResponse);
+        ResponseAPDU apduResponse = commandExecute(command);
+        String receivedResponse = APDUResponse.toString(apduResponse);
+        if(!compare(expectedResponse, receivedResponse))
+            failCount++;
     }
 
-    private ResponseAPDU runCommandAndReflect(String command) throws CardException {
-        CommandAPDU apduCommand = APDUCommand.create(command);
-        outputToConsole(APDUCommand.view(apduCommand));
-        ResponseAPDU apduResponse = Loader.getChannel().transmit(apduCommand);
-        outputToConsole(APDUResponse.view(apduResponse));
-        return apduResponse;
+    private ResponseAPDU commandExecute(String command) {
+        try {
+            CommandAPDU apduCommand = APDUCommand.create(command);
+            outputToConsole(APDUCommand.view(apduCommand));
+            ResponseAPDU apduResponse = Loader.getChannel().transmit(apduCommand);
+            outputToConsole(APDUResponse.view(apduResponse));
+            return apduResponse;
+        } catch (CardException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private boolean compare(String expectedResponse, String response) {
@@ -165,13 +148,5 @@ public class ScriptScanner {
 
     private void outputToConsole(String line){
         System.out.println(line);
-    }
-
-    public int getErrorCount() {
-        return 0;
-    }
-
-    public int getFailCount() {
-        return 0;
     }
 }
