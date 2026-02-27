@@ -5,10 +5,7 @@ import java.util.regex.Pattern;
 
 public final class SubstringSubstitution extends Substitution{
     private static final String regExp = "substr\\([\\dA-F]+,\\d+,\\d+\\)";
-    private Matcher matcher = Pattern.compile(regExp).matcher("");
-
-    public SubstringSubstitution(){
-    }
+    private static final Matcher matcher = Pattern.compile(regExp).matcher("");
 
     @Override
     protected String execute(String str) {

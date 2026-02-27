@@ -1,16 +1,12 @@
 package Substitutions;
 
 import JTestCrypto.ECPointOperation;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class MultiplePointSubstitution extends Substitution{
     private final String regExp = "mulpoint\\([\\dA-F]{128},[\\dA-F]+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-
-    public MultiplePointSubstitution(){
-    }
 
     @Override
     protected String execute(String text) {

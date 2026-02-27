@@ -1,16 +1,12 @@
 package Substitutions;
 
 import JTestCrypto.JTestHMac.JTestHMac;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class HmacSubstitution extends Substitution{
     private final String regExp = "hmac(094|256|512)\\([\\dA-F]+,[\\dA-F]{64}\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-
-    public HmacSubstitution(){
-    }
 
     @Override
     protected String execute(String line){

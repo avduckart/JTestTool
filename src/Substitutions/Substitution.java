@@ -15,14 +15,14 @@ abstract public class Substitution {
         getMatcher().reset(line);
     }
 
-    protected String extractBtwBrackets(String s){
-        int firstInd = s.indexOf('(');
-        int secondInd = firstInd + s.substring(firstInd).indexOf(')');
-        return  s.substring(firstInd + 1, secondInd);
+    protected String extractBtwBrackets(String line){
+        int firstInd = line.indexOf('(');
+        int secondInd = firstInd + line.substring(firstInd).indexOf(')');
+        return line.substring(firstInd + 1, secondInd);
     }
 
     public String replace(String line){
-        getMatcher().reset(line);
+        reset(line);
 
         if(getMatcher().find(0))
             line = line.replaceAll(getRegExp(), execute(getMatcher().group()));

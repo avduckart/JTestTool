@@ -8,9 +8,6 @@ public final class VariableSubstitution extends Substitution {
     private final String regExp = "%\\w+%";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
 
-    public VariableSubstitution(){
-    }
-
     @Override
     protected String execute(String str) {
         return "";

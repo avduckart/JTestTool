@@ -58,14 +58,14 @@ public class ScriptScanner {
                 for (String command : commands)
                     processLine(command);
             }
-        } catch (APDUTestException e) {
+        } catch (SubstitutionException e) {
             outputToConsole(String.format("Uncorrected Test in string with number %d\n", num));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void processLine(String line) throws APDUTestException {
+    private void processLine(String line) throws SubstitutionException {
 
         int match;
         do {

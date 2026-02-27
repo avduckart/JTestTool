@@ -7,9 +7,6 @@ public final class DeclarationSubstitution extends Substitution{
     private final String regExp = "^(%\\w+%)=";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
 
-    public DeclarationSubstitution(){
-    }
-
     @Override
     protected String execute(String str) {
         return "";

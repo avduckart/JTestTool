@@ -5,13 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="260099ed-3711-4195-86d7-234db6fd3ca4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Model/Crypto/HMAC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Model/Crypto/PBKDF2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Crypto/HMAC_3411.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Crypto/Hash/DigestDirector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Crypto/Hash/DigestDirector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Crypto/Hash/Hash.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Crypto/Hash/Hash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Loader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/ScriptScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/ScriptScanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/JTestTool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JTestTool.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/bcprov_ext_jdk15on_160.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/cardextension1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/APDUCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/APDUCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/APDUTestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/SubstitutionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/ECPointOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/ECPointOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/JTestDigest/JTestDigest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/JTestDigest/JTestDigest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/JTestHMac/JTestHMac.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/JTestHMac/JTestHMac.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/JTestPbkdf2/JTestPBKDF2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/JTestPbkdf2/JTestPBKDF2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ScriptScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScriptScanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/CfbSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/CfbSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/DeclarationSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/DeclarationSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/DiversifySubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/DiversifySubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/EcbSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/EcbSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/HashSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/HashSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/HmacSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/HmacSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/InvertSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/InvertSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/MathOperationSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/MathOperationSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/MultiplePointSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/MultiplePointSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/Pbkdf2Substitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/Pbkdf2Substitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/RandSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/RandSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/Substitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/Substitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/SubstringSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/SubstringSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/SumPointSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/SumPointSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/ValueSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/ValueSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Substitutions/VariableSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/VariableSubstitution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -491,12 +513,14 @@
   "keyToString": {
     "Application.Unnamed.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/andrey/Desktop/JTestTool",
+    "last_opened_file_path": "C:/Users/adukart/Projects/JTestTool",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propCompiler"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -536,9 +560,9 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <configuration name="Unnamed" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre" />
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="Model.Loader" />
+      <option name="MAIN_CLASS_NAME" value="ScriptRunner" />
       <module name="JTestTool" />
       <option name="PROGRAM_PARAMETERS" value="run -s $PROJECT_DIR$/out/scripts/hash94.s" />
       <method v="2">
@@ -593,6 +617,13 @@
         <item itemvalue="JUnit.CalculatorTest.testAdd" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -697,24 +728,9 @@
           <option name="timeStamp" value="515" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Model/Loader.java</url>
-          <line>106</line>
-          <option name="timeStamp" value="516" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Model/Loader.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="521" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Model/Logger.java</url>
           <line>15</line>
           <option name="timeStamp" value="523" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Model/Loader.java</url>
-          <line>104</line>
-          <option name="timeStamp" value="525" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -736,7 +752,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/src.zip!/java/math/BigInteger.java">
+    <entry file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk1.8.0_152/src.zip!/java/math/BigInteger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="3389" column="34" lean-forward="true" selection-start-line="3389" selection-start-column="34" selection-end-line="3389" selection-end-column="34" />
@@ -885,21 +901,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/jre/lib/jce.jar!/javax/crypto/JceSecurity.class">
+    <entry file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk1.8.0_152/jre/lib/jce.jar!/javax/crypto/JceSecurity.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="61" column="121" lean-forward="true" selection-start-line="61" selection-start-column="121" selection-end-line="61" selection-end-column="121" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/jre/lib/rt.jar!/sun/security/jca/GetInstance.class">
+    <entry file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk1.8.0_152/jre/lib/rt.jar!/sun/security/jca/GetInstance.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="59" column="32" lean-forward="false" selection-start-line="59" selection-start-column="32" selection-end-line="59" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/jre/lib/jce.jar!/javax/crypto/SecretKeyFactory.class">
+    <entry file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk1.8.0_152/jre/lib/jce.jar!/javax/crypto/SecretKeyFactory.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
@@ -913,7 +929,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_152/jre/lib/jce.jar!/javax/crypto/spec/PBEKeySpec.class">
+    <entry file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk1.8.0_152/jre/lib/jce.jar!/javax/crypto/spec/PBEKeySpec.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="24" column="64" lean-forward="false" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />

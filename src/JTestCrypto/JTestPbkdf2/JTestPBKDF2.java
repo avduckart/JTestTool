@@ -1,7 +1,6 @@
 package JTestCrypto.JTestPbkdf2;
 
 import JTestCrypto.JTestHMac.JTestHMac;
-import Utilities;
 import org.bouncycastle.crypto.digests.GOST3411_2012_512Digest;
 
 public class JTestPBKDF2 {
@@ -12,18 +11,18 @@ public class JTestPBKDF2 {
         int count = Integer.parseInt(c);
         int length = Integer.parseInt(dkLen);
         int blockCount = (length + (blockSize - length % blockSize) % blockSize) / blockSize;
-        byte[] p = Utilities.stringToBytes(password);
+        byte[] p = Utils.stringToBytes(password);
         byte[] u, t, s;
         StringBuilder K = new StringBuilder();
         for (int i = 0; i < blockCount; i++){
-            s = Utilities.stringToBytes(String.format("%s%02X", salt, i));
+            s = Utils.stringToBytes(String.format("%s%02X", salt, i));
             u = hmac.hmac(p, s);
             t = u;
             for (int j = 0; j < count; j++){
                 u = hmac.hmac(p,u);
                 t = xorArr(t,u);
             }
-            K.append(Utilities.bytesToString(t));
+            K.append(Utils.bytesToString(t));
         }
         return K.delete(64*blockCount-length, 64*blockCount).toString();
     }

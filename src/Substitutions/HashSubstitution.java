@@ -1,16 +1,12 @@
 package Substitutions;
 
 import JTestCrypto.JTestDigest.JTestDigest;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class HashSubstitution extends Substitution{
     private final String regExp = "hash(094|256|512)\\([\\dA-F]+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
-
-    public HashSubstitution(){
-    }
 
     @Override
     protected String execute(String line){

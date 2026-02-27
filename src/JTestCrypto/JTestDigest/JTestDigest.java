@@ -1,6 +1,5 @@
 package JTestCrypto.JTestDigest;
 
-import Utilities;
 import org.bouncycastle.crypto.ExtendedDigest;
 import org.bouncycastle.util.Arrays;
 
@@ -27,9 +26,9 @@ public class JTestDigest {
 
     public String execute(String message){
         byte[] hash = new byte[digest.getByteLength()];
-        byte[] msg = Utilities.stringToBytes(message);
+        byte[] msg = Utils.stringToBytes(message);
         hashCalculate(msg, hash);
-        return Utilities.bytesToString(Arrays.reverse(hash));
+        return Utils.bytesToString(Arrays.reverse(hash));
     }
 
     private void hashCalculate(byte[] message, byte[] hash) {

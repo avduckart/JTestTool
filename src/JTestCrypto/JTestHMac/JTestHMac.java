@@ -3,7 +3,6 @@ package JTestCrypto.JTestHMac;
 import JTestCrypto.JTestDigest.DigestAlg;
 import JTestCrypto.JTestDigest.DigestDirector;
 import JTestCrypto.JTestDigest.JTestDigest;
-import Utilities;
 import org.bouncycastle.crypto.Digest;
 import org.bouncycastle.crypto.macs.HMac;
 import org.bouncycastle.crypto.params.KeyParameter;
@@ -33,9 +32,9 @@ public class JTestHMac {
     }
 
     public String execute(String message, String key){
-        byte[] msg = Utilities.stringToBytes(message);
-        byte[] keyArr = Utilities.stringToBytes(key);
-        return Utilities.bytesToString(hmac(msg, keyArr));
+        byte[] msg = Utils.stringToBytes(message);
+        byte[] keyArr = Utils.stringToBytes(key);
+        return Utils.bytesToString(hmac(msg, keyArr));
     }
 
     public byte[] hmac(byte[] text, byte[] key){

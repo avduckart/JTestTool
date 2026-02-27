@@ -1,10 +1,12 @@
+import utils.Utils;
+
 import javax.smartcardio.CommandAPDU;
 
 public class APDUCommand {
     private static final int STRING_LENGTH = 16;
 
-    public CommandAPDU create(String apduString) {
-        return new CommandAPDU(Utilities.stringToBytes(apduString));
+    public static CommandAPDU create(String apduString) {
+        return new CommandAPDU(Utils.stringToBytes(apduString));
     }
 
      public static String view(final CommandAPDU apdu) {

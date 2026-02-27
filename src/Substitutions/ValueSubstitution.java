@@ -7,9 +7,6 @@ public final class ValueSubstitution extends Substitution{
     private final String regExp = "value\\(\\d+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
 
-    public ValueSubstitution(){
-    }
-
     @Override
     protected String execute(String line){
 //        matcher.reset();

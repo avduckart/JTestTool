@@ -1,4 +1,6 @@
-public class Utilities {
+package utils;
+
+public class Utils {
     public static String bytesToString(byte[] bytes){
         StringBuilder result = new StringBuilder();
         for (byte b : bytes)
@@ -6,12 +8,14 @@ public class Utilities {
         return result.toString();
     }
 
-
     public static byte[] stringToBytes(String line){
         int size = line.length() / 2;
         byte[] bytes = new byte[size];
+        var charArr = line.subSequence(0, line.length());
+
         for (int i = 0; i < size; i++)
-            bytes[i] = (byte)Integer.parseInt(line.substring(2 * i, 2 * i + 2), 16);
+            bytes[i] = (byte)Integer.parseInt(charArr, 2 * i, 2 * i + 2, 16);
+
         return bytes;
     }
 }

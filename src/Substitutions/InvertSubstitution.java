@@ -1,6 +1,6 @@
 package Substitutions;
 
-import Utilities;
+import utils.Utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -9,13 +9,10 @@ public final class InvertSubstitution extends Substitution{
     private final String regExp = "invert\\([\\dA-F]+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
 
-    public InvertSubstitution(){
-    }
-
     @Override
     protected String execute(String text) {
         matcher.reset();
-        byte[] bytes = Utilities.stringToBytes(text);
+        byte[] bytes = Utils.stringToBytes(text);
         int length = bytes.length;
         byte tmp;
         for (int i = 0; i < length/2; i++){
@@ -23,7 +20,8 @@ public final class InvertSubstitution extends Substitution{
             bytes[i] = bytes[length - 1 - i];
             bytes[length - 1 - i] = tmp;
         }
-        return Utilities.bytesToString(bytes);
+
+        return Utils.bytesToString(bytes);
     }
 
     @Override

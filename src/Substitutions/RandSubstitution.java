@@ -7,9 +7,6 @@ public final class RandSubstitution extends Substitution{
     private final String regExp = "rand\\(\\d+\\)";
     private final Matcher matcher = Pattern.compile(regExp).matcher("");
 
-    public RandSubstitution(){
-    }
-
     @Override
     protected String execute(String text) {
         matcher.reset();
