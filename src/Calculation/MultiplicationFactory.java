@@ -1,8 +1,12 @@
 package Calculation;
 
 public class MultiplicationFactory implements OperationFactory{
+    private static Multiplication multiplication = null;
+
     @Override
     public Operation create() {
-        return new Multiplication();
+        if(multiplication == null)
+            multiplication = new Multiplication();
+        return multiplication;
     }
 }

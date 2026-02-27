@@ -5,35 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="260099ed-3711-4195-86d7-234db6fd3ca4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/JTestTool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JTestTool.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/bcprov_ext_jdk15on_160.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/cardextension1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/APDUCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/APDUCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/APDUTestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/SubstitutionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/ECPointOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/ECPointOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/JTestDigest/JTestDigest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/JTestDigest/JTestDigest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/JTestHMac/JTestHMac.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/JTestHMac/JTestHMac.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/JTestCrypto/JTestPbkdf2/JTestPBKDF2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/JTestCrypto/JTestPbkdf2/JTestPBKDF2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ScriptScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ScriptScanner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/CfbSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/CfbSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/DeclarationSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/DeclarationSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/DiversifySubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/DiversifySubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/EcbSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/EcbSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/HashSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/HashSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/HmacSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/HmacSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/InvertSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/InvertSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/MathOperationSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/MathOperationSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/MultiplePointSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/MultiplePointSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/Pbkdf2Substitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/Pbkdf2Substitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/RandSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/RandSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/Substitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/Substitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/SubstringSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/SubstringSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/SumPointSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/SumPointSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/ValueSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/ValueSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Substitutions/VariableSubstitution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Substitutions/VariableSubstitution.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Utilities.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculation/AdditionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculation/AdditionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculation/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculation/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculation/DivisionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculation/DivisionFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculation/ModulationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculation/ModulationFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculation/MultiplicationFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculation/MultiplicationFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculation/OperationDirector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculation/OperationDirector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculation/SubstractionFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculation/SubstractionFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -514,6 +493,7 @@
     "Application.Unnamed.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/adukart/Projects/JTestTool",
@@ -731,6 +711,12 @@
           <url>file://$PROJECT_DIR$/src/Model/Logger.java</url>
           <line>15</line>
           <option name="timeStamp" value="523" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/Calculation/AdditionFactory.java</url>
+          <line>3</line>
+          <properties field="addition" class="Calculation.AdditionFactory" />
+          <option name="timeStamp" value="526" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

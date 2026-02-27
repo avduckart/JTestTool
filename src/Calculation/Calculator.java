@@ -3,8 +3,7 @@ package Calculation;
 public class Calculator {
 
     public static String operator(char op, String a, String b){
-        OperationDirector director = new OperationDirector();
-        OperationFactory operationFactory = director.getFactory(op);
+        OperationFactory operationFactory = OperationDirector.getFactory(op);
         Operation operation = operationFactory.create();
 
         return zeroPadding(a, b, operation.execute(a, b));

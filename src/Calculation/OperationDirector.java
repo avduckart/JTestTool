@@ -1,7 +1,7 @@
 package Calculation;
 
 public class OperationDirector{
-    public OperationFactory getFactory(char op) {
+    public static OperationFactory getFactory(char op) {
         switch (op) {
             case '+':
                 return new AdditionFactory();
