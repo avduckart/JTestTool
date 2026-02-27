@@ -1,12 +1,10 @@
-package ScriptScanner;
-
-import ScriptScanner.Substitutions.*;
+import Substitutions.*;
 
 import javax.smartcardio.CardException;
 import javax.smartcardio.CommandAPDU;
 import javax.smartcardio.ResponseAPDU;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +24,7 @@ public class ScriptScanner {
     private final Substitution[] substitutions = {
             new DeclarationSubstitution(), new ValueSubstitution(), new VariableSubstitution(),
             new MathOperationSubstitution(), new HashSubstitution(), new HmacSubstitution(),
-            new Pbkdf2Substitution(), new CfbSubstitution() , new EcbSubstitution(), new RandSubstitution(),
+            new Pbkdf2Substitution(), new CfbSubstitution(), new EcbSubstitution(), new RandSubstitution(),
             new SubstringSubstitution(), new InvertSubstitution(), new MultiplePointSubstitution(),
             new SumPointSubstitution(), new DiversifySubstitution()
     };
@@ -39,34 +37,32 @@ public class ScriptScanner {
         this(new File(scriptPath));
     }
 
-    public void scan() throws IOException, CardException {
+    public void scan() {
         String info = "^>.*";
         String comment = "^#.*";
-        Scanner scanner = new Scanner(scriptFile);
         int num = 0;
 
-        for(String currentLine = scanner.nextLine(); scanner.hasNextLine(); currentLine = scanner.nextLine()) {
-            num++;
+        try (Scanner scanner = new Scanner(scriptFile)) {
+            for (String currentLine = scanner.nextLine(); scanner.hasNextLine(); currentLine = scanner.nextLine()) {
+                num++;
 
-            if(currentLine.matches(comment))
-                continue;
+                if (currentLine.matches(comment))
+                    continue;
 
-            if(currentLine.matches(info)) {
-                outputToConsole(currentLine);
-                continue;
-            }
+                if (currentLine.matches(info)) {
+                    outputToConsole(currentLine);
+                    continue;
+                }
 
-            try {
-                String[] commands = currentLine.replaceAll("\\s+","").split(";+");
+                String[] commands = currentLine.replaceAll("\\s+", "").split(";+");
                 for (String command : commands)
                     processLine(command);
             }
-            catch (APDUTestException e){
-                outputToConsole(String.format("Uncorrected Test in string with number %d\n", num));
-                break;
-            }
+        } catch (APDUTestException e) {
+            outputToConsole(String.format("Uncorrected Test in string with number %d\n", num));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        scanner.close();
     }
 
     private void processLine(String line) throws APDUTestException {
@@ -79,10 +75,10 @@ public class ScriptScanner {
                 subst.reset(line);
                 line = subst.replace(line);
             }
-        }while(match != 0);
+        } while (match != 0);
 
         testMatcher = testPattern.matcher(line);
-        if(testMatcher.matches()) {
+        if (testMatcher.matches()) {
             testMatcher.reset();
             testRun(line);
         }
@@ -93,7 +89,7 @@ public class ScriptScanner {
 
         String[] commandAndResult = apduPair.split(",+", 2);
 
-        if(commandAndResult.length != 2) {
+        if (commandAndResult.length != 2) {
             errorCount++;
             return;
         }
@@ -103,7 +99,7 @@ public class ScriptScanner {
         expectedResponse = replaceExpectedLengthToRegExp(expectedResponse);
         ResponseAPDU apduResponse = commandExecute(command);
         String receivedResponse = APDUResponse.toString(apduResponse);
-        if(!compare(expectedResponse, receivedResponse))
+        if (!compare(expectedResponse, receivedResponse))
             failCount++;
     }
 
@@ -111,7 +107,7 @@ public class ScriptScanner {
         try {
             CommandAPDU apduCommand = APDUCommand.create(command);
             outputToConsole(APDUCommand.view(apduCommand));
-            ResponseAPDU apduResponse = Loader.getChannel().transmit(apduCommand);
+            ResponseAPDU apduResponse = ScriptRunner.getChannel().transmit(apduCommand);
             outputToConsole(APDUResponse.view(apduResponse));
             return apduResponse;
         } catch (CardException e) {
@@ -125,7 +121,7 @@ public class ScriptScanner {
         return result;
     }
 
-    private String extractBtwBrackets(String s){
+    private String extractBtwBrackets(String s) {
         int firstInd = s.indexOf('(');
         int secondInd = firstInd + s.substring(firstInd).indexOf(')');
         return s.substring(firstInd + 1, secondInd);
@@ -134,18 +130,18 @@ public class ScriptScanner {
     private String replaceExpectedLengthToRegExp(String expectedResponse) {
         String[] interval;
         String responseWithExpectedLength = ".*\\(\\d+(,\\d+)?\\)L.*";
-        while(expectedResponse.matches(responseWithExpectedLength)) {
+        while (expectedResponse.matches(responseWithExpectedLength)) {
             String lengthL = extractBtwBrackets(expectedResponse);
-            if(lengthL.contains(",")) {
+            if (lengthL.contains(",")) {
                 interval = lengthL.split(",+", 2);
                 expectedResponse = expectedResponse.replaceFirst("\\(\\d+(,\\d+)?\\)L", "[\\\\dA-F]{" + 2 * Integer.parseInt(interval[0]) + "," + 2 * Integer.parseInt(interval[1]) + "}");
-            }else
+            } else
                 expectedResponse = expectedResponse.replaceFirst("\\(\\d+(,\\d+)?\\)L", "[\\\\dA-F]{" + 2 * Integer.parseInt(lengthL) + "}");
         }
         return expectedResponse;
     }
 
-    private void outputToConsole(String line){
+    private void outputToConsole(String line) {
         System.out.println(line);
     }
 }

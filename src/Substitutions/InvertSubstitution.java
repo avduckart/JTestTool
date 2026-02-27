@@ -1,4 +1,4 @@
-package ScriptScanner.Substitutions;
+package Substitutions;
 
 import Utilities;
 

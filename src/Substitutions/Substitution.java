@@ -1,4 +1,4 @@
-package ScriptScanner.Substitutions;
+package Substitutions;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;

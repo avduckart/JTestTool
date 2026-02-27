@@ -1,44 +1,37 @@
 import javax.smartcardio.ResponseAPDU;
 
-public class APDUResponse{
+public class APDUResponse {
+    private static final int STRING_LENGTH = 16;
 
-    public static String view(ResponseAPDU response){
-            StringBuilder strBuilder = new StringBuilder("");
-        if(response != null) {
-            int bodyStringsCount;
-            int RESULT_LENGTH = 2;
-            int STRING_LENGTH = 16;
-            byte[] bytes = response.getBytes();
-            int length = bytes.length;
-            int bodyLength = length - RESULT_LENGTH;
+    public static String view(ResponseAPDU apdu) {
+        if (apdu == null)
+            return "APDU-RESPONSE IS NULL";
 
-            strBuilder.append("  Response <--\n");
-            bodyStringsCount = (bodyLength % STRING_LENGTH == 0) ? bodyLength / STRING_LENGTH : (1 + bodyLength / STRING_LENGTH);
-            for (int j = 0; j < bodyStringsCount; j++) {
-                strBuilder.append("\t");
-                for (int i = 0; i < ((bodyLength > STRING_LENGTH) ? STRING_LENGTH : bodyLength); i++)
-                    strBuilder.append(String.format("%02X ", bytes[j * STRING_LENGTH + i]));
-                strBuilder.append("\n");
-                bodyLength = bodyLength - STRING_LENGTH;
-            }
-            strBuilder.append("\t");
-            for (int i = RESULT_LENGTH; i > 0; i--)
-                strBuilder.append(String.format("%02X ", bytes[length - i]));
+        StringBuilder strBuilder = new StringBuilder("  Response <--\n");
+        byte[] data = apdu.getData();
+
+        for (int i = 0; i < apdu.getNr(); i++) {
+            if(i % STRING_LENGTH == 0)
+                strBuilder.append("\n\t");
+            strBuilder.append(String.format("%02X ", data[i]));
         }
-        else
-            strBuilder.append("APDU-RESPONSE IS NULL");
+
+        strBuilder.append("\n\t");
+        strBuilder.append(String.format("%02X ", apdu.getSW1()));
+        strBuilder.append(String.format("%02X ", apdu.getSW2()));
+
         return strBuilder.toString();
     }
 
-    public static String toString(ResponseAPDU response){
-        StringBuilder strBuilder = new StringBuilder("");
-        if(response != null) {
-            byte[] bytes = response.getBytes();
-            for (byte b : bytes)
-                strBuilder.append(String.format("%02X", b));
-        }
-        else
-            strBuilder.append("APDU-RESPONSE IS NULL");
+    public static String toString(ResponseAPDU apdu) {
+        if (apdu == null)
+            return "APDU-RESPONSE IS NULL";
+
+        StringBuilder strBuilder = new StringBuilder();
+        byte[] bytes = apdu.getBytes();
+        for (byte b : bytes)
+            strBuilder.append(String.format("%02X", b));
+
         return strBuilder.toString();
     }
 }

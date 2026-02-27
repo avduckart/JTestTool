@@ -1,4 +1,4 @@
-package ScriptScanner.Substitutions;
+package Substitutions;
 
 import JTestCrypto.JTestPbkdf2.JTestPBKDF2;
 

@@ -1,33 +1,27 @@
 import javax.smartcardio.CommandAPDU;
 
 public class APDUCommand {
+    private static final int STRING_LENGTH = 16;
 
-    public static CommandAPDU create(String apduString) {
+    public CommandAPDU create(String apduString) {
         return new CommandAPDU(Utilities.stringToBytes(apduString));
     }
 
-     public static String view(CommandAPDU apduCommand) {
-
-         int headLength = (apduCommand.getNc() == 0) ? 4 : 5;
-
+     public static String view(final CommandAPDU apdu) {
          StringBuilder strBuilder = new StringBuilder("  Send command -->\n\t");
-         byte[] bytes = apduCommand.getBytes();
-         int bodyLength = bytes.length - headLength;
+         strBuilder.append(String.format("%02X ", apdu.getCLA()));
+         strBuilder.append(String.format("%02X ", apdu.getINS()));
+         strBuilder.append(String.format("%02X ", apdu.getP1()));
+         strBuilder.append(String.format("%02X ", apdu.getP2()));
 
-         for (int i = 0; i < headLength; i++)
-            strBuilder.append(String.format("%02X ", bytes[i]));
+         final byte[] data = apdu.getData();
 
-        int bodyStringsCount = (bodyLength % 16 == 0) ? (bodyLength / 16) : (1 + bodyLength / 16);
-
-        for (int j = 0; j < bodyStringsCount; j++) {
-            strBuilder.append("\n\t");
-            for (int i = 0; i < ((bodyLength > 16) ? 16 : bodyLength); i++)
-                strBuilder.append(String.format("%02X ", bytes[headLength + j * 16 + i]));
-            bodyLength = bodyLength - 16;
+         for (int i = 0; i < data.length; i++) {
+            if(i % STRING_LENGTH == 0)
+                strBuilder.append("\n\t");
+            strBuilder.append(String.format("%02X ", data[i]));
         }
 
         return strBuilder.toString();
-
-        //return Utilities.bytesToString(apduCommand.getBytes());
     }
 }

@@ -1,5 +1,3 @@
-import ScriptScanner.ScriptScanner;
-
 import javax.smartcardio.*;
 import java.io.*;
 import java.util.*;
@@ -22,7 +20,11 @@ public class ScriptRunner {
         }
     }
 
-    public static void main(String args[]) throws CardException, IOException {
+    public static CardChannel getChannel(){
+        return channel;
+    }
+
+    public static void main(String args[]) {
 
         if (args.length != 3)
             return;
@@ -61,7 +63,7 @@ public class ScriptRunner {
         }
     }
 
-    private static void scriptExecute(String scriptPath) throws CardException, IOException {
+    private static void scriptExecute(String scriptPath) {
         ScriptScanner scriptScanner = new ScriptScanner(scriptPath);
         scriptScanner.scan();
     }
